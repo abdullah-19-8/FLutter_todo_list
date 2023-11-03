@@ -32,7 +32,6 @@ class _TaskScreenState extends State<TaskScreen> {
   Widget build(BuildContext context) {
     return Consumer<TaskController>(builder: (context, provider, _) {
       return Scaffold(
-        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: primaryColor,
           title: Text(
@@ -82,63 +81,71 @@ class _TaskScreenState extends State<TaskScreen> {
                 ),
               ),
               const Spacer(),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: primaryColor,
-                  minimumSize: Size(
-                    double.infinity,
-                    61 / screenHeight * MediaQuery.of(context).size.height,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                onPressed: () {
-                  if (_taskController.text.isEmpty) {
-                    Fluttertoast.showToast(
-                      msg: 'Task name is empty',
-                      gravity: ToastGravity.BOTTOM,
-                      backgroundColor: Colors.white,
-                      textColor: Colors.red,
-                    );
-                    return;
-                  }
-                  if (widget.task == null) {
-                    provider.addTask(_taskController.text);
-                    Navigator.pop(context);
-                    return;
-                  }
-                  if (widget.task!.title == _taskController.text) {
-                    Fluttertoast.showToast(
-                      msg: 'Task name is same',
-                      gravity: ToastGravity.BOTTOM,
-                      backgroundColor: Colors.white,
-                      textColor: Colors.red,
-                    );
-                    return;
-                  } else {
-                    provider.editTask(
-                      widget.index!,
-                      _taskController.text,
-                    );
-                    Navigator.pop(context);
-                  }
-                },
-                child: const Text(
-                  'Done',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
             ],
+          ),
+        ),
+        bottomSheet: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 20,
+          ),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: primaryColor,
+              minimumSize: Size(
+                double.infinity,
+                61 / screenHeight * MediaQuery.of(context).size.height,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            onPressed: () {
+              if (_taskController.text.isEmpty) {
+                Fluttertoast.cancel();
+
+                Fluttertoast.showToast(
+                  msg: 'Task name is empty',
+                  gravity: ToastGravity.BOTTOM,
+                  backgroundColor: Colors.white,
+                  textColor: Colors.red,
+                  timeInSecForIosWeb: 1,
+                  toastLength: Toast.LENGTH_SHORT,
+                );
+                return;
+              }
+              if (widget.task == null) {
+                provider.addTask(_taskController.text);
+                Navigator.pop(context);
+                return;
+              }
+              if (widget.task!.title == _taskController.text) {
+                Fluttertoast.cancel();
+                Fluttertoast.showToast(
+                  msg: 'Task name is same',
+                  gravity: ToastGravity.BOTTOM,
+                  backgroundColor: Colors.white,
+                  textColor: Colors.red,
+                );
+                return;
+              } else {
+                provider.editTask(
+                  widget.index!,
+                  _taskController.text,
+                );
+                Navigator.pop(context);
+              }
+            },
+            child: const Text(
+              'Done',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w400,
+              ),
+            ),
           ),
         ),
       );

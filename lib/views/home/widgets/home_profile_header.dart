@@ -13,9 +13,10 @@ class HomeProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 110 / screenHeight * size.height,
-      padding: EdgeInsets.symmetric(
-        horizontal: 32 / screenWidth * size.width,
+      height: 120 / screenHeight * size.height,
+      padding: EdgeInsets.only(
+        left: 32 / screenWidth * size.width,
+        top: 15 / screenHeight * size.height,
       ),
       decoration: const BoxDecoration(
         color: Color(0xFF3556AB),
