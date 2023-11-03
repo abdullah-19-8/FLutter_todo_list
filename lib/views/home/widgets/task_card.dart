@@ -45,22 +45,7 @@ class TaskCard extends StatelessWidget {
               },
               child: provider.tasks[index].isDone
                   ? SvgPicture.asset('assets/icons/taskDone.svg')
-                  : Container(
-                      width: 30.7 / screenWidth * size.width,
-                      height: 30.7 / screenHeight * size.height,
-                      decoration: ShapeDecoration(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(
-                            width: 1.50 / screenWidth * size.width,
-                            color: const Color(0xFF071C55),
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            51 / screenWidth * size.width,
-                          ),
-                        ),
-                      ),
-                    ),
+                  : SvgPicture.asset('assets/icons/Rectangle.svg'),
             ),
             SizedBox(
               width: 16 / screenWidth * size.width,
