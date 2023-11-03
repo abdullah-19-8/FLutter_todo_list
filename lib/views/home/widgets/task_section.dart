@@ -12,6 +12,8 @@ class TaskSection extends StatelessWidget {
 
   final Size size;
 
+  // key
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -22,10 +24,17 @@ class TaskSection extends StatelessWidget {
         child: Consumer<TaskController>(builder: (context, provider, _) {
           return ListView.builder(
             itemCount: provider.tasks.length,
-            itemBuilder: (context, index) => TaskCard(
-              size: size,
-              index: index,
-              provider: provider,
+            itemBuilder: (context, index) => Dismissible(
+              key: Key(provider.tasks[index].id.toString()),
+              direction: DismissDirection.endToStart,
+              onDismissed: (direction) {
+                provider.deleteTask(index);
+              },
+              child: TaskCard(
+                size: size,
+                index: index,
+                provider: provider,
+              ),
             ),
           );
         }),
