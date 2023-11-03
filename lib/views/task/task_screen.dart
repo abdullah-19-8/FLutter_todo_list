@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:short_point/controllers/task_controller.dart';
 import 'package:short_point/models/task_model.dart';
@@ -31,9 +32,9 @@ class _TaskScreenState extends State<TaskScreen> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: primaryColor,
-          title: const Text(
-            'Add New Task',
-            style: TextStyle(
+          title: Text(
+            widget.task != null ? 'Edit Task' : 'Add New Task',
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w500,
             ),
@@ -42,7 +43,11 @@ class _TaskScreenState extends State<TaskScreen> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: SvgPicture.asset('assets/icons/arrowBack.svg'),
+            icon: SvgPicture.asset('assets/icons/arrowBack.svg',
+                colorFilter: const ColorFilter.mode(
+                  Colors.white,
+                  BlendMode.srcIn,
+                )),
           ),
         ),
         body: Padding(
@@ -86,15 +91,35 @@ class _TaskScreenState extends State<TaskScreen> {
                   ),
                 ),
                 onPressed: () {
+                  if (_taskController.text.isEmpty) {
+                    Fluttertoast.showToast(
+                      msg: 'Task name is empty',
+                      gravity: ToastGravity.BOTTOM,
+                      backgroundColor: Colors.white,
+                      textColor: Colors.red,
+                    );
+                    return;
+                  }
                   if (widget.task == null) {
                     provider.addTask(_taskController.text);
+                    Navigator.pop(context);
+                    return;
+                  }
+                  if (widget.task!.title == _taskController.text) {
+                    Fluttertoast.showToast(
+                      msg: 'Task name is same',
+                      gravity: ToastGravity.BOTTOM,
+                      backgroundColor: Colors.white,
+                      textColor: Colors.red,
+                    );
+                    Navigator.pop(context);
+                    return;
                   } else {
                     provider.editTask(
                       widget.index!,
                       _taskController.text,
                     );
                   }
-                  Navigator.pop(context);
                 },
                 child: const Text(
                   'Done',

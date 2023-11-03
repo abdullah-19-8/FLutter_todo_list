@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:short_point/controllers/task_controller.dart';
 import 'package:short_point/utils/constant.dart';
+import 'package:short_point/views/task/task_screen.dart';
 
 class TaskCard extends StatelessWidget {
   const TaskCard({
@@ -25,8 +27,9 @@ class TaskCard extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(6),
       ),
-      margin: EdgeInsets.symmetric(
-        vertical: 8 / screenHeight * size.height,
+      margin: EdgeInsets.only(
+        top: 8,
+        bottom: provider.tasks.length - 1 == index ? 100 : 0,
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(
@@ -78,7 +81,27 @@ class TaskCard extends StatelessWidget {
             ),
             const Spacer(),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                provider.tasks[index].isDone
+                    ? Fluttertoast.showToast(
+                        msg: "Can't edit completed task",
+                        gravity: ToastGravity.BOTTOM,
+                        backgroundColor: Colors.white,
+                        textColor: Colors.red,
+                        fontSize: 16.0,
+                      )
+                    : Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return TaskScreen(
+                              task: provider.tasks[index],
+                              index: index,
+                            );
+                          },
+                        ),
+                      );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
