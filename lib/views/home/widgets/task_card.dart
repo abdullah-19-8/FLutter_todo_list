@@ -20,15 +20,13 @@ class TaskCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      shadowColor: Colors.black.withOpacity(0.5),
+      elevation: 10,
       shape: RoundedRectangleBorder(
-        side: const BorderSide(
-          width: 1,
-          color: Color(0xFFE6E6E6),
-        ),
         borderRadius: BorderRadius.circular(6),
       ),
       margin: EdgeInsets.only(
-        top: 8,
+        top: 24,
         bottom: provider.tasks.length - 1 == index ? 100 : 0,
       ),
       child: Padding(

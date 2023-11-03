@@ -34,6 +34,7 @@ class _TaskScreenState extends State<TaskScreen> {
       return Scaffold(
         appBar: AppBar(
           backgroundColor: primaryColor,
+          centerTitle: true,
           title: Text(
             widget.task != null ? 'Edit Task' : 'Add New Task',
             style: const TextStyle(
@@ -73,14 +74,18 @@ class _TaskScreenState extends State<TaskScreen> {
               ),
               TextField(
                 controller: _taskController,
+                style: const TextStyle(
+                  color: Color(0xFF0C2971),
+                  fontSize: 18,
+                ),
                 decoration: InputDecoration(
                   focusColor: primaryColor,
+                  fillColor: primaryColor,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
               ),
-              const Spacer(),
             ],
           ),
         ),

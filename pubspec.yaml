@@ -29,12 +29,11 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
-    - assets/fonts/
   fonts:
     - family: Roboto
       fonts:
         - asset: assets/fonts/Roboto-Regular.ttf
-        - asset: assets/fonts/Roboto-Medium.ttf
+          weight: 400
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

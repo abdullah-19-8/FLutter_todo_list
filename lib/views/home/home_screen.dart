@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:short_point/utils/constant.dart';
 import 'package:short_point/views/home/widgets/home_profile_header.dart';
 import 'package:short_point/views/home/widgets/subscription_section.dart';
@@ -27,6 +28,7 @@ class HomePage extends StatelessWidget {
         ),
       ),
       floatingActionButton: InkWell(
+        overlayColor: MaterialStateProperty.all(Colors.transparent),
         onTap: () {
           Navigator.push(
             context,
@@ -37,33 +39,7 @@ class HomePage extends StatelessWidget {
             ),
           );
         },
-        child: Container(
-          width: 60 / screenWidth * size.width,
-          height: 61 / screenHeight * size.height,
-          decoration: ShapeDecoration(
-            color: const Color(0xFF3556AB),
-            shape: RoundedRectangleBorder(
-              side: const BorderSide(
-                width: 2,
-                strokeAlign: BorderSide.strokeAlignOutside,
-                color: Color(0xFF113EB1),
-              ),
-              borderRadius: BorderRadius.circular(100),
-            ),
-            shadows: const [
-              BoxShadow(
-                color: Color(0x3F000000),
-                blurRadius: 4,
-                offset: Offset(0, 4),
-              ),
-            ],
-          ),
-          child: const Icon(
-            Icons.add,
-            color: Colors.white,
-            size: 40,
-          ),
-        ),
+        child: SvgPicture.asset('assets/icons/fab.svg'),
       ),
     );
   }

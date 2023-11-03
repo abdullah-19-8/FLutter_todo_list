@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:short_point/utils/constant.dart';
 import 'package:short_point/views/home/widgets/pro_section.dart';
@@ -13,16 +12,36 @@ class SubscriptionSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 116 / screenHeight * size.height,
-      color: const Color(0xFFCCE53D),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ProSection(size: size),
-          const Spacer(),
-          Container(
+    return Stack(
+      children: [
+        Container(
+          width: double.infinity,
+          height: 116 / screenHeight * size.height,
+          decoration: const ShapeDecoration(
+            color: Color(0xFFCCE53D),
+            shape: RoundedRectangleBorder(
+              side: BorderSide(width: 2, color: Color(0xFF9EB031)),
+            ),
+          ),
+          child: Container(
+            decoration: const BoxDecoration(
+              border: Border(
+                top: BorderSide(width: 2, color: Colors.white),
+              ),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ProSection(size: size),
+                const Spacer(),
+              ],
+            ),
+          ),
+        ),
+        Positioned(
+          top: 0,
+          right: 0,
+          child: Container(
             width: 66.11 / screenWidth * size.width,
             height: 71 / screenHeight * size.height,
             margin: EdgeInsets.only(
@@ -43,8 +62,8 @@ class SubscriptionSection extends StatelessWidget {
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
