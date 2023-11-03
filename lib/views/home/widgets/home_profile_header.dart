@@ -13,10 +13,9 @@ class HomeProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 140 / screenHeight * size.height,
+      height: 110 / screenHeight * size.height,
       padding: EdgeInsets.symmetric(
         horizontal: 32 / screenWidth * size.width,
-        vertical: 20 / screenHeight * size.height,
       ),
       decoration: const BoxDecoration(
         color: Color(0xFF3556AB),
@@ -33,7 +32,6 @@ class HomeProfileHeader extends StatelessWidget {
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 'Hello, John',
