@@ -23,6 +23,9 @@ class _TaskScreenState extends State<TaskScreen> {
   void initState() {
     super.initState();
     _taskController.text = widget.task?.title ?? '';
+    _taskController.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
@@ -112,13 +115,13 @@ class _TaskScreenState extends State<TaskScreen> {
                       backgroundColor: Colors.white,
                       textColor: Colors.red,
                     );
-                    Navigator.pop(context);
                     return;
                   } else {
                     provider.editTask(
                       widget.index!,
                       _taskController.text,
                     );
+                    Navigator.pop(context);
                   }
                 },
                 child: const Text(
